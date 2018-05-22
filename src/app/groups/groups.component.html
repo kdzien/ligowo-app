@@ -1,8 +1,31 @@
+<section class="container">
+    <section class="col-md-6 offset-md-3">
+      <h4>Twoje grupy</h4>
+      <p *ngFor="let group of groups" (click)="openGroup(group)">
+          {{group.name}}
+        </p>
+    </section>
 
-<p *ngFor="let group of groups">
-  {{group.name}}
-</p>
+    <section class="col-md-6 offset-md-3">
+      <h4>Dodaj grupę</h4>
+      <form>
+        <div class="form-group">
+          <label>Nazwa grupy</label>
+          <input name="ngGroupName" [(ngModel)]="newGroupName" class="form-control">
+        </div>
+        <button (click)="addGroup()">Dodaj grupę</button>
+      </form>
+    </section>
 
-<button (click)="addGroup()">Dodaj grupę</button>
-<input [(ngModel)]="joinedGroupID">
-<button (click)="joinTo()">Dodaj się do grupy</button>
+    <section class="col-md-6 offset-md-3">
+      <h4>Dodaj się do grupy</h4>
+    <form>
+      <div class="form-group">
+        <label>ID grupy</label>
+        <input name="joinedGroupID" [(ngModel)]="joinedGroupID" class="form-control">
+      </div>
+      <button (click)="joinTo()">Dodaj</button>
+    </form>
+    </section>
+
+  </section>

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
 import { LigowoService } from 'src/app/services/ligowo.service';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LigowoService } from 'src/app/services/ligowo.service';
     LoginComponent,
     RegisterComponent,
     GroupsComponent,
-    MainComponent
+    MainComponent,
+    GroupComponent
   ],
   imports: [
     FormsModule ,

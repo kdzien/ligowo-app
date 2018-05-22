@@ -1,6 +1,3 @@
-<section class="container">
-  <p>
-    {{user?.username}}
-  </p><button (click)="logout()">Wyloguj</button>
+
+Zalogowany użytkownik: {{user?.username}} <a href="#" (click)="logout()">Wyloguj</a>
   <router-outlet></router-outlet>
-</section>
