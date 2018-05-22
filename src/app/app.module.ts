@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
+import { LigowoService } from 'src/app/services/ligowo.service';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,12 @@ import { MainComponent } from './main/main.component';
   imports: [
     FormsModule ,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      appRoutes
     ),
     BrowserModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,LigowoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

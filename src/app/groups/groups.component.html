@@ -1,3 +1,6 @@
-<p>
-  groups works!
+
+<p *ngFor="let group of groups">
+  {{group.name}}
 </p>
+
+<button (click)="addGroup()">Dodaj grupę</button>
