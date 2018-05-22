@@ -1,7 +1,6 @@
 
 export interface User {
-  id: string,
-  ttl: number,
-  created: string,
-  userId: string
+  username: string,
+  email: number,
+  id: string
  }

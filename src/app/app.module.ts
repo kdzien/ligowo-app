@@ -6,18 +6,27 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { appRoutes } from './app.routes';
 import { AuthenticationService } from './services/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { GroupsComponent } from './groups/groups.component';
+import { MainComponent } from './main/main.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GroupsComponent,
+    MainComponent
   ],
   imports: [
+    FormsModule ,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
