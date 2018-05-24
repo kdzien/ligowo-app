@@ -14,7 +14,7 @@ export class GroupsComponent implements OnInit {
   newGroupName: string;
   joinedGroupID: string;
   constructor(private ligowoService: LigowoService, private router: Router) {
-    this.current_user = JSON.parse(localStorage.getItem('currentUser'));
+
   }
   addGroup(): void {
     const new_group: Group = {
@@ -30,13 +30,11 @@ export class GroupsComponent implements OnInit {
   }
   joinTo(): void {
     this.ligowoService.joinGroup(this.joinedGroupID, this.current_user.userId).subscribe(message => {
-      console.log(message);
       this.getGroups();
     });
   }
   getGroups() {
     this.ligowoService.getUserGroups(this.current_user.userId).subscribe(groups => {
-      console.log(groups);
       this.groups = groups.data;
     });
   }
@@ -44,6 +42,7 @@ export class GroupsComponent implements OnInit {
     this.router.navigate([`main/groups/${group.id}`]);
   }
   ngOnInit() {
+    this.current_user = JSON.parse(localStorage.getItem('currentUser'));
     this.getGroups();
   }
 

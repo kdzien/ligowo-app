@@ -1,16 +1,35 @@
 <p>
-  Nazwa Grupy : {{group.name}}
+  Nazwa Grupy : {{group?.name}}
 </p>
 <section class="container">
   <div class="row">
     <section class="col-md-4">
       <h4>Typy do obstawienia:</h4>
+      <div *ngFor="let match of matches">
+        {{match.name}}
+        <button (click)="betMatch(match,1)">1</button>
+        <button (click)="betMatch(match,0)">X</button>
+        <button (click)="betMatch(match,2)">2</button>
+      </div>
     </section>
     <section class="col-md-4">
       <h4>Typy obstawione:</h4>
+      <div *ngFor="let leftM of leftMatches">
+        {{leftM.match.name}}
+      </div>
     </section>
     <section class="col-md-4">
       <h4>Typy zakończone:</h4>
+      <div *ngFor="let finalM of finalMatches">
+        {{finalM.match.name}}
+      </div>
     </section>
   </div>
+</section>
+<section *ngIf="current_user==group?.admin">
+  <form>
+    <input [(ngModel)]="newMatchName" name="newMatchName" placeholder="nazwa meczu">
+    <input [(ngModel)]="newMatchDate" name="newMatchDate" placeholder="data">
+    <button (click)="addMatch()">Dodaj mecz</button>
+  </form>
 </section>
