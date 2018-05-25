@@ -4,7 +4,7 @@
 <section class="container">
   <div class="row">
     <section class="col-md-4">
-      <h4>Typy do obstawienia:</h4>
+      <h4>Mecze do obstawienia:</h4>
       <div *ngFor="let match of matches">
         {{match.name}}
         <button (click)="betMatch(match,1)">1</button>
@@ -13,13 +13,13 @@
       </div>
     </section>
     <section class="col-md-4">
-      <h4>Typy obstawione:</h4>
+      <h4>Mecze obstawione:</h4>
       <div *ngFor="let leftM of leftMatches">
         {{leftM.match.name}}
       </div>
     </section>
     <section class="col-md-4">
-      <h4>Typy zakończone:</h4>
+      <h4>Mecze zakończone:</h4>
       <div *ngFor="let finalM of finalMatches">
         {{finalM.match.name}}
       </div>

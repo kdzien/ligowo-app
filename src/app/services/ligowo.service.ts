@@ -46,4 +46,8 @@ export class LigowoService {
   addMatch(match): Observable<Match> {
     return this.http.post<Match>(`http://localhost:3000/api/Matches`, match);
   }
+  addBet(bet): Observable<Bet> {
+    bet.user_id=this.user_id;
+    return this.http.post<Bet>(`http://localhost:3000/api/Bets`, bet);
+  }
 }

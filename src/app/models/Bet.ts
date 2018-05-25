@@ -1,6 +1,6 @@
 
 export interface Bet {
-  user_id: string;
+  user_id?: string;
   type: string;
   status: number;
   date: string;
