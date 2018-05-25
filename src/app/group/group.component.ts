@@ -62,14 +62,19 @@ export class GroupComponent implements OnInit {
     });
   }
 
-  betMatch(match, bet): void {
+  betMatch(match, type): void {
     const newBet: Bet = {
-      type: bet,
+      type: type,
       status: 0,
       date: match.date,
       matchId: match.id
     }
     this.ligowoService.addBet(newBet).subscribe(bet => {
+      this.refresh();
+    })
+  }
+  updateBet(bet,type): void {
+    this.ligowoService.upadteBet(bet,type).subscribe(bet => {
       this.refresh();
     })
   }

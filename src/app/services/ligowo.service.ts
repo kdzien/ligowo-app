@@ -50,4 +50,7 @@ export class LigowoService {
     bet.user_id=this.user_id;
     return this.http.post<Bet>(`http://localhost:3000/api/Bets`, bet);
   }
+  upadteBet(bet,type): Observable<any> {
+    return this.http.patch<any>(`http://localhost:3000/api/Bets/${bet.id}?access_token=${this.auth_token}`, {type:type} );
+  }
 }

@@ -15,7 +15,10 @@
     <section class="col-md-4">
       <h4>Mecze obstawione:</h4>
       <div *ngFor="let leftM of leftMatches">
-        {{leftM.match.name}}
+        {{leftM.match.name}} {{leftM.type}}
+        <button (click)="updateBet(leftM,1)">1</button>
+        <button (click)="updateBet(leftM,0)">X</button>
+        <button (click)="updateBet(leftM,2)">2</button>
       </div>
     </section>
     <section class="col-md-4">
