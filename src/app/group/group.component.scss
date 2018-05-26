@@ -1,0 +1,42 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+h1{
+  text-align: center;
+  margin-bottom: 20px;
+  background: white;
+  padding: 10px;
+  margin-top: -20px;
+}
+
+.match-panel{
+  background-color:white;
+  display:flex;
+  margin-bottom:1px;
+  .name{
+    margin-right: auto;
+  }
+  .name, .bet{
+    padding:7px;
+  }
+  .bet-wrapper{
+    border-left:none;
+    button{
+      cursor:pointer;
+      background:whitesmoke;
+      border:none;
+      height:100%;
+      width:40px;
+      &:hover{
+        background:$s-color;
+        color:white;
+      }
+    }
+  }
+}
+
+.status2bet{
+  background-color:#ed1b24;
+}
+.status1bet{
+  background-color:#a6ff5f;
+}

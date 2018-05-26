@@ -1,31 +1,46 @@
-<section class="container">
-    <section class="col-md-6 offset-md-3">
-      <h4>Twoje grupy</h4>
-      <p *ngFor="let group of groups" (click)="openGroup(group)">
-          {{group.name}}
-        </p>
+<section class="container-fluid">
+ <div class="row">
+
+  <section class="col-md-8 ">
+    <section class="group-box">
+      <h4>Grupy do ktorych należysz</h4>
+      <div class="group-wrapper" >
+          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'others'" (click)="openGroup(group)" >{{group.name}}</div>
+      </div>
     </section>
 
-    <section class="col-md-6 offset-md-3">
+    <section class="group-box">
+      <h4>Twoje grupy</h4>
+      <div class="group-wrapper group-box" >
+          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'own'" (click)="openGroup(group)" >{{group.name}}</div>
+      </div>
+    </section>
+
+  </section>
+
+  <section class="col-md-4">
+    <section class="form-wrapper">
       <h4>Dodaj grupę</h4>
       <form>
         <div class="form-group">
-          <label>Nazwa grupy</label>
+          <div class="form-label">Nazwa grupy</div>
           <input name="ngGroupName" [(ngModel)]="newGroupName" class="form-control">
         </div>
-        <button (click)="addGroup()">Dodaj grupę</button>
+        <button class="main-button full-width-button" (click)="addGroup()">DODAJ GRUPĘ!</button>
       </form>
     </section>
 
-    <section class="col-md-6 offset-md-3">
+    <section class="form-wrapper">
       <h4>Dodaj się do grupy</h4>
     <form>
       <div class="form-group">
         <label>ID grupy</label>
         <input name="joinedGroupID" [(ngModel)]="joinedGroupID" class="form-control">
       </div>
-      <button (click)="joinTo()">Dodaj</button>
+      <button class="main-button full-width-button" (click)="joinTo()">DODAJ SIĘ!</button>
     </form>
     </section>
-
   </section>
+
+ </div>
+</section>

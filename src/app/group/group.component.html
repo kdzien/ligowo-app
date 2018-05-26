@@ -1,30 +1,36 @@
-<p>
-  Nazwa Grupy : {{group?.name}}
-</p>
+<h1>
+  {{group?.name}}
+</h1>
 <section class="container">
   <div class="row">
     <section class="col-md-4">
       <h4>Mecze do obstawienia:</h4>
-      <div *ngFor="let match of matches">
-        {{match.name}}
-        <button (click)="betMatch(match,1)">1</button>
-        <button (click)="betMatch(match,0)">X</button>
-        <button (click)="betMatch(match,2)">2</button>
-      </div>
+        <div class="match-panel" *ngFor="let match of matches">
+          <div class="name">{{match.name}}</div>
+          <div class="bet-wrapper">
+            <button (click)="betMatch(match,1)">1</button>
+            <button (click)="betMatch(match,0)">X</button>
+            <button (click)="betMatch(match,2)">2</button>
+          </div>
+        </div>
     </section>
     <section class="col-md-4">
       <h4>Mecze obstawione:</h4>
-      <div *ngFor="let leftM of leftMatches">
-        {{leftM.match.name}} {{leftM.type}}
-        <button (click)="updateBet(leftM,1)">1</button>
-        <button (click)="updateBet(leftM,0)">X</button>
-        <button (click)="updateBet(leftM,2)">2</button>
+      <div class="match-panel" *ngFor="let leftM of leftMatches">
+        <div class="name">{{leftM.match.name}}</div>
+        <div class="bet">{{leftM.type}}</div>
+        <div class="bet-wrapper">
+          <button (click)="updateBet(leftM,1)">1</button>
+          <button (click)="updateBet(leftM,0)">X</button>
+          <button (click)="updateBet(leftM,2)">2</button>
+        </div>
+
       </div>
     </section>
     <section class="col-md-4">
       <h4>Mecze zakończone:</h4>
-      <div *ngFor="let finalM of finalMatches">
-        {{finalM.match.name}}
+      <div class="match-panel" *ngFor="let finalM of finalMatches" [ngClass]="{'status2bet': finalM.status==2, 'status1bet': finalM.status==1}">
+        <div class="name">{{finalM.match.name}}</div>
       </div>
     </section>
   </div>

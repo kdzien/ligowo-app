@@ -1,0 +1,11 @@
+@mixin main-gradient() {
+  background: #0052D4;
+  background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+  background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+}
+
+@mixin main-shadow(){
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(92,92,92,1);
+-moz-box-shadow: 3px 3px 5px 0px rgba(92,92,92,1);
+box-shadow: 3px 3px 5px 0px rgba(92,92,92,1);
+}

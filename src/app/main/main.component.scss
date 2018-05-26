@@ -1,0 +1,21 @@
+@import '../../scss/mixins.scss';
+
+header{
+  position:relative;
+  display: flex;
+  justify-content: flex-end;
+  background-color:white;
+  margin-bottom:20px;
+  &:after{
+    content:"";
+    height:2px;
+    @include main-gradient();
+    width:100%;
+    position:absolute;
+    bottom:0;
+    display:block;
+  }
+  #user-info{
+    padding:5px;
+  }
+}

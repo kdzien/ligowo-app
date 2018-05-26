@@ -9,7 +9,7 @@ import { Bet } from '../models/Bet';
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
   private group: Group;
@@ -41,13 +41,13 @@ export class GroupComponent implements OnInit {
   }
   getFinalMatches(id: string): void {
     this.ligowoService.getFinalMatches(id).subscribe(finalMatches => {
-      console.log(finalMatches)
+      console.log(finalMatches);
       this.finalMatches = finalMatches;
     });
   }
   getLeftMatches(id: string): void {
     this.ligowoService.getLeftMatches(id).subscribe(leftMatches => {
-      console.log(leftMatches)
+      console.log(leftMatches);
       this.leftMatches = leftMatches;
     });
   }
@@ -68,17 +68,18 @@ export class GroupComponent implements OnInit {
       status: 0,
       date: match.date,
       matchId: match.id
-    }
+    };
     this.ligowoService.addBet(newBet).subscribe(bet => {
       this.refresh();
-    })
+    });
   }
-  updateBet(bet,type): void {
-    this.ligowoService.upadteBet(bet,type).subscribe(bet => {
+  updateBet(bet, type): void {
+    // tslint:disable-next-line:no-shadowed-variable
+    this.ligowoService.upadteBet(bet, type).subscribe(bet => {
       this.refresh();
-    })
+    });
   }
-  refresh(): void{
+  refresh(): void {
     this.getMatches(this.group_id);
     this.getLeftMatches(this.group_id);
     this.getFinalMatches(this.group_id);

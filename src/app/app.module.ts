@@ -12,6 +12,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
 import { LigowoService } from 'src/app/services/ligowo.service';
 import { GroupComponent } from './group/group.component';
+import { ForfilterPipe } from './forfilter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GroupComponent } from './group/group.component';
     RegisterComponent,
     GroupsComponent,
     MainComponent,
-    GroupComponent
+    GroupComponent,
+    ForfilterPipe
   ],
   imports: [
     FormsModule ,

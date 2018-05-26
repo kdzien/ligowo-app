@@ -1,0 +1,51 @@
+@import '../../scss/mixins.scss';
+  .group-box{
+    margin-bottom:20px;
+    .group-wrapper{
+      display:flex;
+      flex-flow:row wrap;
+      .group{
+        @include main-shadow();
+        margin:0 7px 15px 7px;
+        flex: 25%;
+        cursor:pointer;
+        position:relative;
+        padding:30px 20px;
+        background-color:white;
+        transition: 0.2s ease all;
+        text-align:center;
+        &:hover{
+          transform:scale(1.05);
+        }
+      }
+    }
+  }
+
+.main-button{
+  padding:15px;
+  color:white;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  @include main-gradient();
+  border:none;
+  &.full-width-button{
+    width:100%;
+  }
+  &:hover{
+    background:#6FB1FC !important;
+  }
+}
+
+
+.form-wrapper{
+
+  margin-bottom:20px;
+  form{
+    .form-group{
+      padding:10px;
+    }
+    background-color:white;
+
+  }
+}

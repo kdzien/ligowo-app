@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css']
+  styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
   private current_user: any;
@@ -43,6 +43,7 @@ export class GroupsComponent implements OnInit {
   }
   ngOnInit() {
     this.current_user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.current_user);
     this.getGroups();
   }
 
