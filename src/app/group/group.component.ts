@@ -5,6 +5,7 @@ import { Group } from '../models/Group';
 import { Observable } from 'rxjs/internal/Observable';
 import { Match } from '../models/Match';
 import { Bet } from '../models/Bet';
+import { GrouptitleService } from '../services/grouptitle.service';
 
 @Component({
   selector: 'app-group',
@@ -16,19 +17,22 @@ export class GroupComponent implements OnInit {
   private matches: Array<Match>;
   private finalMatches: Array<Bet>;
   private leftMatches: Array<Bet>;
+  private newMatches: Array<Match> = [{name: '', date: ''}];
   private group_id: string;
   private current_user: string;
-  private newMatchName: string;
-  private newMatchDate: string;
-  constructor(private route: ActivatedRoute, private ligowoService: LigowoService) {
+
+  constructor(private route: ActivatedRoute, private ligowoService: LigowoService, private groupTitle: GrouptitleService,) {
 
   }
-
+  ngOnDestroy(){
+    this.groupTitle.setTitle('');
+  }
   ngOnInit() {
     this.current_user = JSON.parse(localStorage.getItem('currentUser')).userId;
     this.group_id = this.route.snapshot.paramMap.get('id');
     this.ligowoService.getGroupInfo(this.group_id).subscribe(group => {
       this.group = group;
+      this.groupTitle.setTitle(this.group.name);
     });
     this.getMatches(this.group_id);
     this.getFinalMatches(this.group_id);
@@ -52,14 +56,18 @@ export class GroupComponent implements OnInit {
     });
   }
   addMatch(): void {
-    const newMatch: Match = {
-      name: this.newMatchName,
-      date: this.newMatchDate,
-      group_id: this.group_id,
-    };
-    this.ligowoService.addMatch(newMatch).subscribe(match => {
-      this.getMatches(this.group_id);
-    });
+    this.newMatches.push({name: '', date: ''});
+    console.log(this.newMatches);
+  }
+  sendMatches(): void {
+    // const newMatch: Match = {
+    //   name: this.newMatchName,
+    //   date: this.newMatchDate,
+    //   group_id: this.group_id,
+    // };
+    // this.ligowoService.addMatch(newMatch).subscribe(match => {
+    //   this.getMatches(this.group_id);
+    // });
   }
 
   betMatch(match, type): void {

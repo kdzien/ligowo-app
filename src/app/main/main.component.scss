@@ -2,10 +2,19 @@
 
 header{
   position:relative;
-  display: flex;
-  justify-content: flex-end;
   background-color:white;
   margin-bottom:20px;
+  .container{
+  display: flex;
+  flex-flow:row wrap;
+  justify-content: space-between;
+  #user-info, #group-title{
+    padding:5px;
+  }
+  #group-title{
+    font-weight:700;
+  }
+  }
   &:after{
     content:"";
     height:2px;
@@ -14,8 +23,5 @@ header{
     position:absolute;
     bottom:0;
     display:block;
-  }
-  #user-info{
-    padding:5px;
   }
 }

@@ -1,10 +1,8 @@
-<h1>
-  {{group?.name}}
-</h1>
 <section class="container">
   <div class="row">
-    <section class="col-md-4">
+    <section class="col-md-4 match-group">
       <h4>Mecze do obstawienia:</h4>
+        <p *ngIf="matches?.length==0">Nie ma żadnych meczow</p>
         <div class="match-panel" *ngFor="let match of matches">
           <div class="name">{{match.name}}</div>
           <div class="bet-wrapper">
@@ -14,8 +12,9 @@
           </div>
         </div>
     </section>
-    <section class="col-md-4">
+    <section class="col-md-4 match-group">
       <h4>Mecze obstawione:</h4>
+      <p *ngIf="leftMatches?.length==0">Nic nie obstawiles</p>
       <div class="match-panel" *ngFor="let leftM of leftMatches">
         <div class="name">{{leftM.match.name}}</div>
         <div class="bet">{{leftM.type}}</div>
@@ -27,18 +26,29 @@
 
       </div>
     </section>
-    <section class="col-md-4">
+    <section class="col-md-4 match-group">
       <h4>Mecze zakończone:</h4>
-      <div class="match-panel" *ngFor="let finalM of finalMatches" [ngClass]="{'status2bet': finalM.status==2, 'status1bet': finalM.status==1}">
+      <p *ngIf="finalMatches?.length==0">Brak zakończonych meczow</p>
+      <div class="match-panel" *ngFor="let finalM of finalMatches" >
         <div class="name">{{finalM.match.name}}</div>
+        
+        <i *ngIf="finalM.status==2" class="fa fa-times" ></i>
+        <i *ngIf="finalM.status==1" class="fa fa-check"></i>
       </div>
     </section>
   </div>
 </section>
-<section *ngIf="current_user==group?.admin">
-  <form>
-    <input [(ngModel)]="newMatchName" name="newMatchName" placeholder="nazwa meczu">
-    <input [(ngModel)]="newMatchDate" name="newMatchDate" placeholder="data">
-    <button (click)="addMatch()">Dodaj mecz</button>
-  </form>
+<section class="container" id="admin-panel" *ngIf="current_user==group?.admin">
+  <section>
+    <h4>Dodaj mecze do grupy</h4>
+    <form id="newMatch">
+      <div *ngFor="let newMatch of newMatches" class="form-group">
+        <input [(ngModel)]="newMatch.name" name="newMatchName" placeholder="nazwa meczu">
+        <input [(ngModel)]="newMatch.date" name="newMatchDate" id="date" type="datetime-local">
+      </div>
+      <button (click)="addMatch()">Dodaj mecz</button>
+      <!-- <input [(ngModel)]="newMatchDate" name="newMatchDate" placeholder="data"> -->
+    </form>
+    <div id="new-match" (click)="sendMatches()">Dodaj mecze</div>
+  </section>
 </section>
