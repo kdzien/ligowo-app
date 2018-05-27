@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { LigowoService } from 'src/app/services/ligowo.service';
 import { GroupComponent } from './group/group.component';
 import { ForfilterPipe } from './forfilter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ForfilterPipe } from './forfilter.pipe';
     ForfilterPipe
   ],
   imports: [
+    BrowserAnimationsModule,
     FormsModule ,
     RouterModule.forRoot(
       appRoutes

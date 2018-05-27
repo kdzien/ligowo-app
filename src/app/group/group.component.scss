@@ -7,6 +7,12 @@ h1{
   padding: 10px;
   margin-top: -20px;
 }
+p{
+  font-size:14px;
+  font-weight:500;
+  color:rgb(180, 180, 180);
+  text-align:center;
+}
 
 .match-group{
   h4{
@@ -39,43 +45,7 @@ h1{
       }
     }
   }
-}
-&:last-child{
-  border-right:none;
-}
-}
-#admin-panel{
-  form{
-    display:flex;
-    flex-flow:row wrap;
-    width:100%;
-    margin:0 auto;
-    .form-group{
-      margin:0;
-      display:flex;
-      flex-direction:column;
-      flex:0.25;
-      input{
-        flex:1;
-        border:none;
-        padding:10px;
-      }
-    }
-    button{
-      flex:0.25;
-      border:none;
-      background:$s-color;
-      color:white;
-    }
-  }
 
-  #new-match{
-    text-align:center;
-    color:white;
-    padding:10px;
-    background-color:rgba(0,0,0,0.4)
-  }
-}
 .fa-times{
   color:#ed1b24 !important;
   padding:10px;
@@ -83,4 +53,70 @@ h1{
 .fa-check{
   color:#73ea14 !important;
   padding:10px;
+}
+.fa-minus{
+  color:#c2c2c2 !important;
+  padding:10px;
+}
+
+}
+&:last-child{
+  border-right:none;
+}
+}
+#admin-panel-wrapper{
+  overflow: hidden;
+  @include main-shadow();
+  width: 600px;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  top: 0;
+  padding-top: 47px;
+  background-color:white;
+  #admin-panel{
+    .admin-panel-element{
+      padding:10px;
+      h4{
+        font-size:14px;
+        color:white;
+        padding:20px;
+        background-color:$s-color;
+        margin:-10px -10px 10px -10px;
+        i{
+          float:right;
+        }
+      }
+      #newMatch{
+        .form-group{
+          margin-bottom: 4px;
+        }
+        input{
+          font-size: 14px;
+          text-align: center;
+          width: 50%;
+          border: none;
+          border-bottom: 1px solid gray;
+          &:focus{
+            outline:none;
+          }
+        }
+        button{
+          width:100%;
+          border:none;
+          padding:7px;
+        }
+      }
+      .confirm-admin{
+        background:none;border:none;
+        padding:10px;
+        font-weight:600;
+        margin-top:10px;
+        font-size:14px;
+        color:$f-color;
+        display: block;
+        margin-left: auto;
+      }
+    }
+  }
 }

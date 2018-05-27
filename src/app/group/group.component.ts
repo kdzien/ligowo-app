@@ -6,13 +6,31 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Match } from '../models/Match';
 import { Bet } from '../models/Bet';
 import { GrouptitleService } from '../services/grouptitle.service';
+import { trigger, transition, animate, style, state } from '@angular/animations';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  styleUrls: ['./group.component.scss'],
+  animations: [
+    trigger('myAwesomeAnimation', [
+      state('hide', style({
+        transform: 'translateX(-550px)',
+        height: '102px',
+      })),
+      state('show', style({
+        transform: 'translateX(0px)',
+        height: '100%',
+      })),
+      transition('hide <=> show', animate('100ms ease-in')),
+    ]),
+  ]
 })
 export class GroupComponent implements OnInit {
+  // animation
+  private adminPanel = 'hide';
+  //
+
   private group: Group;
   private matches: Array<Match>;
   private finalMatches: Array<Bet>;
@@ -92,6 +110,8 @@ export class GroupComponent implements OnInit {
     this.getLeftMatches(this.group_id);
     this.getFinalMatches(this.group_id);
   }
-
+  showAdminPanel() {
+    this.adminPanel = (this.adminPanel === 'hide' ? 'show' : 'hide');
+  }
 
 }

@@ -1,6 +1,7 @@
 @import '../../scss/mixins.scss';
 
 header{
+  z-index: 1;
   position:relative;
   background-color:white;
   margin-bottom:20px;
@@ -9,7 +10,22 @@ header{
   flex-flow:row wrap;
   justify-content: space-between;
   #user-info, #group-title{
-    padding:5px;
+    padding:10px;
+    font-family: 'Signika', sans-serif;
+  }
+  button{
+    font-family: 'Signika', sans-serif;
+    margin-left:10px;
+    border:none;
+    @include main-gradient();
+    color:white;
+    padding:3px 20px;
+    font-size:14px;
+    font-weight:bold;
+    border-radius:30px;
+  }
+  i{
+    padding-right:10px;
   }
   #group-title{
     font-weight:700;
