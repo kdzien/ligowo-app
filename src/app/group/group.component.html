@@ -1,4 +1,5 @@
 <section class="container">
+    <div class="header">Twoje typowania</div>
   <div class="row">
     <section class="col-md-4 match-group">
       <h4>Mecze do obstawienia:</h4>
@@ -39,14 +40,17 @@
     </section>
   </div>
 </section>
+<section class="container">
+  <div class="header">Ranking</div>
+</section>
 <div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
-  <section id="admin-panel"  >
+  <section id="admin-panel">
     <section class="admin-panel-element">
       <h4>Dodaj mecze <i class="fa fa-times" [ngClass]="{'fa-bars':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
       <form id="newMatch">
-        <div *ngFor="let newMatch of newMatches" class="form-group">
-          <input [(ngModel)]="newMatch.name" name="newMatchName" placeholder="nazwa meczu">
-          <input [(ngModel)]="newMatch.date" name="newMatchDate" id="date" type="datetime-local">
+        <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
+          <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu">
+          <input [(ngModel)]="newMatch.date" name="newMatchDate{{i}}" id="date" type="datetime-local">
         </div>
         <button (click)="addMatch()" >Dodaj mecz</button>
         <!-- <input [(ngModel)]="newMatchDate" name="newMatchDate" placeholder="data"> -->

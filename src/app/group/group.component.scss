@@ -13,13 +13,22 @@ p{
   color:rgb(180, 180, 180);
   text-align:center;
 }
-
+.container{
+  margin-bottom:20px;
+  .header{
+    font-size: 14px;
+    text-align: left;
+    margin: 0 -15px 0 -15px;
+    background-color: #4364f7;
+    color: white;
+    padding:7px;
+  }
+}
 .match-group{
   h4{
     text-align:center;
   }
   background-color:white;
-  border-right:solid 1px gray;
   padding:20px 20px 0px 20px;
   .match-panel{
   display:flex;

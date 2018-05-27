@@ -22,7 +22,7 @@ import { trigger, transition, animate, style, state } from '@angular/animations'
         transform: 'translateX(0px)',
         height: '100%',
       })),
-      transition('hide <=> show', animate('100ms ease-in')),
+      transition('hide <=> show', animate('200ms ease-in')),
     ]),
   ]
 })
