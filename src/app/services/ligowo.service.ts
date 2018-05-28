@@ -35,6 +35,10 @@ export class LigowoService {
     return this.http.get<Array<Match>>(
       `http://localhost:3000/api/Matches/bets/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
+  getGroupMatches(group_id): Observable<Array<Match>> {
+    return this.http.get<Array<Match>>(
+      `http://localhost:3000/api/Matches//bets/groupMatches/${group_id}?access_token=${this.auth_token}`, {} );
+  }
   getFinalMatches(group_id): Observable<Array<Bet>> {
     return this.http.get<Array<Bet>>(
       `http://localhost:3000/api/Matches/bets/userdone/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
@@ -43,8 +47,8 @@ export class LigowoService {
     return this.http.get<Array<Bet>>(
       `http://localhost:3000/api/Matches/bets/userleft/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
-  addMatch(match): Observable<Match> {
-    return this.http.post<Match>(`http://localhost:3000/api/Matches`, match);
+  addMatch(matches): Observable<Array<Match>> {
+    return this.http.post<Array<Match>>(`http://localhost:3000/api/Matches`, matches);
   }
   addBet(bet): Observable<Bet> {
     bet.user_id = this.user_id;
@@ -52,5 +56,8 @@ export class LigowoService {
   }
   upadteBet(bet, type): Observable<any> {
     return this.http.patch<any>(`http://localhost:3000/api/Bets/${bet.id}?access_token=${this.auth_token}`, {type: type} );
+  }
+  updateMatch(match, score): Observable<any> {
+    return this.http.patch<any>(`http://localhost:3000/api/Matches/${match.id}?access_token=${this.auth_token}`, {score: score} );
   }
 }

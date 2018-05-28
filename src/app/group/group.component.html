@@ -50,15 +50,27 @@
       <form id="newMatch">
         <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
           <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu">
-          <input [(ngModel)]="newMatch.date" name="newMatchDate{{i}}" id="date" type="datetime-local">
+          <input [(ngModel)]="newMatch.date" name="newMatchDate{{i}}" id="date" type="date">
+          <input [(ngModel)]="newMatch.time" name="newMatchTime{{i}}" id="time" type="time">
         </div>
         <button (click)="addMatch()" >Dodaj mecz</button>
-        <!-- <input [(ngModel)]="newMatchDate" name="newMatchDate" placeholder="data"> -->
       </form>
       <button class="confirm-admin" (click)="sendMatches()">DODAJ MECZE</button>
     </section>
-    <section class="admin-panel-element">
+    <section class="admin-panel-element match-group">
       <h4>Wprowadz wyniki</h4>
+      <div class="match-panel" *ngFor="let match of groupMatches">
+        <div class="name">{{match.name}}</div>
+        <div class="bet-wrapper">
+          <button (click)="updateMatch(match,1)">1</button>
+          <button (click)="updateMatch(match,3)">X</button>
+          <button (click)="updateMatch(match,2)">2</button>
+        </div>
+      </div>
+    </section>
+    <section class="admin-panel-element match-group">
+      <h4>Aktualizacja rankingu</h4>
+      <button class="confirm-admin" (click)="sendMatches()">ZAAKTUALIZUJ</button>
     </section>
   </section>
 </div>

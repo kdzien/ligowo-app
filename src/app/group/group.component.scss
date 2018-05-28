@@ -16,11 +16,10 @@ p{
 .container{
   margin-bottom:20px;
   .header{
-    font-size: 14px;
+    font-size: 15px;
+    font-weight:bold;
     text-align: left;
     margin: 0 -15px 0 -15px;
-    background-color: #4364f7;
-    color: white;
     padding:7px;
   }
 }
@@ -29,15 +28,16 @@ p{
     text-align:center;
   }
   background-color:white;
-  padding:20px 20px 0px 20px;
+  padding:15px;
   .match-panel{
   display:flex;
   margin-bottom:1px;
+  font-size: 14px;
   .name{
     margin-right: auto;
   }
   .name, .bet{
-    padding:7px;
+    padding:3px;
   }
   .bet-wrapper{
     border-left:none;
@@ -46,8 +46,7 @@ p{
       background:whitesmoke;
       border:none;
       height:100%;
-      width:40px;
-      background:lighten($s-color,27%);
+      width:30px;
       &:hover{
         background:$s-color;
         color:white;
@@ -74,6 +73,9 @@ p{
 }
 }
 #admin-panel-wrapper{
+  h4{
+    text-align: left !important;
+  }
   overflow: hidden;
   @include main-shadow();
   width: 600px;
@@ -108,6 +110,9 @@ p{
           border-bottom: 1px solid gray;
           &:focus{
             outline:none;
+          }
+          &#date, &#time{
+            width:25%;
           }
         }
         button{

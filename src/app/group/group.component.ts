@@ -35,7 +35,8 @@ export class GroupComponent implements OnInit {
   private matches: Array<Match>;
   private finalMatches: Array<Bet>;
   private leftMatches: Array<Bet>;
-  private newMatches: Array<Match> = [{name: '', date: ''}];
+  private groupMatches: Array<Match>;
+  private newMatches: Array<Match> = [{name: '', date: '', time: ''}];
   private group_id: string;
   private current_user: string;
 
@@ -52,13 +53,16 @@ export class GroupComponent implements OnInit {
       this.group = group;
       this.groupTitle.setTitle(this.group.name);
     });
-    this.getMatches(this.group_id);
-    this.getFinalMatches(this.group_id);
-    this.getLeftMatches(this.group_id);
+   this.refresh();
   }
   getMatches(id: string): void {
     this.ligowoService.getMatches(id).subscribe(matches => {
       this.matches = matches;
+    });
+  }
+  getGroupMatches(id: string): void {
+    this.ligowoService.getGroupMatches(id).subscribe(matches => {
+      this.groupMatches = matches;
     });
   }
   getFinalMatches(id: string): void {
@@ -74,18 +78,18 @@ export class GroupComponent implements OnInit {
     });
   }
   addMatch(): void {
-    this.newMatches.push({name: '', date: ''});
+    this.newMatches.push({name: '', date: '', time: ''});
     console.log(this.newMatches);
   }
   sendMatches(): void {
-    // const newMatch: Match = {
-    //   name: this.newMatchName,
-    //   date: this.newMatchDate,
-    //   group_id: this.group_id,
-    // };
-    // this.ligowoService.addMatch(newMatch).subscribe(match => {
-    //   this.getMatches(this.group_id);
-    // });
+    let tempArray : Array<Match> = [];
+    this.newMatches.forEach(elem => {
+      tempArray.push({name:elem.name, date:`${elem.date.replace(/-/g,'')}${elem.time.replace(/:/g,'')}`,group_id: this.group_id,})
+    })
+    this.ligowoService.addMatch(tempArray).subscribe(match => {
+      this.newMatches = [];
+      this.getMatches(this.group_id);
+    });
   }
 
   betMatch(match, type): void {
@@ -105,10 +109,16 @@ export class GroupComponent implements OnInit {
       this.refresh();
     });
   }
+  updateMatch(match,score){
+    this.ligowoService.updateMatch(match, score).subscribe(match => {
+      this.refresh();
+    })
+  }
   refresh(): void {
     this.getMatches(this.group_id);
     this.getLeftMatches(this.group_id);
     this.getFinalMatches(this.group_id);
+    this.getGroupMatches(this.group_id);
   }
   showAdminPanel() {
     this.adminPanel = (this.adminPanel === 'hide' ? 'show' : 'hide');
