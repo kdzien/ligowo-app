@@ -6,6 +6,7 @@ import { User } from 'src/app/models/User';
 import { Observable } from 'rxjs/Observable';
 import { Match } from '../models/Match';
 import { Bet } from '../models/Bet';
+import { Rank } from '../models/Rank';
 @Injectable({
   providedIn: 'root'
 })
@@ -59,5 +60,11 @@ export class LigowoService {
   }
   updateMatch(match, score): Observable<any> {
     return this.http.patch<any>(`http://localhost:3000/api/Matches/${match.id}?access_token=${this.auth_token}`, {score: score} );
+  }
+  updateRank(group_id): Observable<string> {
+    return this.http.get<any>(`http://localhost:3000/api/Matches/updateRank/${group_id}?access_token=${this.auth_token}`);
+  }
+  getRank(group_id): Observable<Array<Rank>> {
+    return this.http.get<any>(`http://localhost:3000/api/Ranks/${group_id}?access_token=${this.auth_token}`);
   }
 }

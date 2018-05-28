@@ -41,8 +41,19 @@
   </div>
 </section>
 <section class="container">
-  <div class="header">Ranking</div>
+  <section class="row">
+    <section class="col-md-4 ranking">
+      <div class="header">Ranking</div>
+      <div *ngFor="let rank of ranks">
+        {{rank.user.username}} {{rank.rank}}
+      </div>
+    </section>
+    <section class="col-md-4 comments">
+        <div class="header">Komentarze</div>
+      </section>
+  </section>
 </section>
+
 <div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
   <section id="admin-panel">
     <section class="admin-panel-element">
@@ -59,18 +70,19 @@
     </section>
     <section class="admin-panel-element match-group">
       <h4>Wprowadz wyniki</h4>
+      <p *ngIf="groupMatches?.length==0">Brak zakończonych meczow</p>
       <div class="match-panel" *ngFor="let match of groupMatches">
         <div class="name">{{match.name}}</div>
         <div class="bet-wrapper">
           <button (click)="updateMatch(match,1)">1</button>
-          <button (click)="updateMatch(match,3)">X</button>
+          <button (click)="updateMatch(match,0)">X</button>
           <button (click)="updateMatch(match,2)">2</button>
         </div>
       </div>
     </section>
     <section class="admin-panel-element match-group">
       <h4>Aktualizacja rankingu</h4>
-      <button class="confirm-admin" (click)="sendMatches()">ZAAKTUALIZUJ</button>
+      <button class="confirm-admin" (click)="updateRank()">ZAAKTUALIZUJ</button>
     </section>
   </section>
 </div>

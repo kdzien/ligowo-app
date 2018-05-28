@@ -7,6 +7,7 @@ import { Match } from '../models/Match';
 import { Bet } from '../models/Bet';
 import { GrouptitleService } from '../services/grouptitle.service';
 import { trigger, transition, animate, style, state } from '@angular/animations';
+import { Rank } from '../models/Rank';
 
 @Component({
   selector: 'app-group',
@@ -35,15 +36,17 @@ export class GroupComponent implements OnInit {
   private matches: Array<Match>;
   private finalMatches: Array<Bet>;
   private leftMatches: Array<Bet>;
+  private ranks: Array<Rank>;
   private groupMatches: Array<Match>;
-  private newMatches: Array<Match> = [{name: '', date: '', time: ''}];
+  private newMatches: Array<Match> = [{name: '', date: ''}];
   private group_id: string;
   private current_user: string;
 
   constructor(private route: ActivatedRoute, private ligowoService: LigowoService, private groupTitle: GrouptitleService,) {
 
   }
-  ngOnDestroy(){
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
     this.groupTitle.setTitle('');
   }
   ngOnInit() {
@@ -53,42 +56,57 @@ export class GroupComponent implements OnInit {
       this.group = group;
       this.groupTitle.setTitle(this.group.name);
     });
-   this.refresh();
+    this.refresh();
+  }
+  getGroupMatches(id: string): void {
+    this.ligowoService.getGroupMatches(id).subscribe(matches => {
+      console.log(matches);
+      this.groupMatches = matches;
+    });
   }
   getMatches(id: string): void {
     this.ligowoService.getMatches(id).subscribe(matches => {
       this.matches = matches;
     });
   }
-  getGroupMatches(id: string): void {
-    this.ligowoService.getGroupMatches(id).subscribe(matches => {
-      this.groupMatches = matches;
-    });
-  }
   getFinalMatches(id: string): void {
     this.ligowoService.getFinalMatches(id).subscribe(finalMatches => {
-      console.log(finalMatches);
       this.finalMatches = finalMatches;
     });
   }
   getLeftMatches(id: string): void {
     this.ligowoService.getLeftMatches(id).subscribe(leftMatches => {
-      console.log(leftMatches);
       this.leftMatches = leftMatches;
     });
   }
+  getRank(id: string): void {
+    this.ligowoService.getRank(id).subscribe(ranks => {
+      this.ranks = ranks;
+    });
+  }
   addMatch(): void {
-    this.newMatches.push({name: '', date: '', time: ''});
-    console.log(this.newMatches);
+    this.newMatches.push({name: '', date: ''});
   }
   sendMatches(): void {
-    let tempArray : Array<Match> = [];
+    // tslint:disable-next-line:prefer-const
+    let tempMatchesArray = [];
     this.newMatches.forEach(elem => {
-      tempArray.push({name:elem.name, date:`${elem.date.replace(/-/g,'')}${elem.time.replace(/:/g,'')}`,group_id: this.group_id,})
-    })
-    this.ligowoService.addMatch(tempArray).subscribe(match => {
-      this.newMatches = [];
-      this.getMatches(this.group_id);
+      // tslint:disable-next-line:max-line-length
+      tempMatchesArray.push({group_id: this.group_id, name: elem.name, date: `${elem.date.replace(/-/g, '')}${elem.time.replace(/:/g, '')}`});
+    });
+    this.ligowoService.addMatch(tempMatchesArray).subscribe(match => {
+      this.newMatches = [{name: '', date: ''}];
+      this.refresh();
+    });
+  }
+  updateRank(): void {
+    this.ligowoService.updateRank(this.group_id).subscribe(status => {
+      console.log(status);
+    });
+  }
+  updateMatch(match, score): void {
+    this.ligowoService.updateMatch(match, score).subscribe(matchs => {
+      console.log(matchs);
     });
   }
 
@@ -109,19 +127,14 @@ export class GroupComponent implements OnInit {
       this.refresh();
     });
   }
-  updateMatch(match,score){
-    this.ligowoService.updateMatch(match, score).subscribe(match => {
-      this.refresh();
-    })
-  }
   refresh(): void {
     this.getMatches(this.group_id);
     this.getLeftMatches(this.group_id);
     this.getFinalMatches(this.group_id);
     this.getGroupMatches(this.group_id);
+    this.getRank(this.group_id);
   }
   showAdminPanel() {
     this.adminPanel = (this.adminPanel === 'hide' ? 'show' : 'hide');
   }
-
 }
