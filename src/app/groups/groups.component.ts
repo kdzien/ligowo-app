@@ -12,7 +12,6 @@ export class GroupsComponent implements OnInit {
   private current_user: any;
   private groups: Array<Group>;
   newGroupName: string;
-  joinedGroupID: string;
   constructor(private ligowoService: LigowoService, private router: Router) {
 
   }
@@ -26,11 +25,6 @@ export class GroupsComponent implements OnInit {
       this.getGroups();
     }, err => {
       console.log(err);
-    });
-  }
-  joinTo(): void {
-    this.ligowoService.joinGroup(this.joinedGroupID, this.current_user.userId).subscribe(message => {
-      this.getGroups();
     });
   }
   getGroups() {

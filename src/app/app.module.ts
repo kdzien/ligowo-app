@@ -14,6 +14,8 @@ import { LigowoService } from 'src/app/services/ligowo.service';
 import { GroupComponent } from './group/group.component';
 import { ForfilterPipe } from './forfilter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from 'src/app/services/alert.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GroupsComponent,
     MainComponent,
     GroupComponent,
-    ForfilterPipe
+    ForfilterPipe,
+    AlertComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -34,7 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService,LigowoService],
+  providers: [AuthenticationService,LigowoService,AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

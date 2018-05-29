@@ -26,8 +26,8 @@ export class LigowoService {
   addGroup(group: Group): Observable<Group> {
     return this.http.post<Group>(`http://localhost:3000/api/groups/?access_token=${this.auth_token}`, group);
   }
-  joinGroup(group_id, user_id): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/api/groups/join/${group_id}/${this.user_id}?access_token=${this.auth_token}`, { } );
+  joinGroup(group_id, user_email): Observable<any> {
+    return this.http.patch<any>(`http://localhost:3000/api/groups/join/${group_id}/${user_email}?access_token=${this.auth_token}`, { } );
   }
   getGroupInfo(group_id): Observable<Group> {
     return this.http.get<Group>(`http://localhost:3000/api/groups/${group_id}?access_token=${this.auth_token}`, {} );

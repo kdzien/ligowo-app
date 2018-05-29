@@ -8,6 +8,7 @@ import { Bet } from '../models/Bet';
 import { GrouptitleService } from '../services/grouptitle.service';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { Rank } from '../models/Rank';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-group',
@@ -41,11 +42,18 @@ export class GroupComponent implements OnInit {
   private newMatches: Array<Match> = [{name: '', date: ''}];
   private group_id: string;
   private current_user: string;
+  private newUserEmail: string;
 
-  constructor(private route: ActivatedRoute, private ligowoService: LigowoService, private groupTitle: GrouptitleService,) {
+  constructor(private route: ActivatedRoute, private ligowoService: LigowoService, private groupTitle: GrouptitleService,
+  private alertService : AlertService) {
 
   }
   // tslint:disable-next-line:use-life-cycle-interface
+  setError() {
+    this.alertService.setMessage("wiadomosc z group",() => {
+      let ft = this.alertService.setMessage('',()=>{});
+    });
+  }
   ngOnDestroy() {
     this.groupTitle.setTitle('');
   }
@@ -101,12 +109,13 @@ export class GroupComponent implements OnInit {
   }
   updateRank(): void {
     this.ligowoService.updateRank(this.group_id).subscribe(status => {
+      this.refresh();
       console.log(status);
     });
   }
   updateMatch(match, score): void {
     this.ligowoService.updateMatch(match, score).subscribe(matchs => {
-      console.log(matchs);
+      this.refresh();
     });
   }
 
@@ -127,6 +136,13 @@ export class GroupComponent implements OnInit {
       this.refresh();
     });
   }
+  
+  joinUser(): void {
+    this.ligowoService.joinGroup(this.group_id, this.newUserEmail).subscribe(message => {
+      console.log(message);
+    });
+  }
+
   refresh(): void {
     this.getMatches(this.group_id);
     this.getLeftMatches(this.group_id);
