@@ -1,11 +1,9 @@
 #alert{
     position:absolute;
     top:60px;
-    background-color:rgba(255, 142, 142,0.4);
-    border:solid 1px rgb(248, 17, 17);
-    border-radius:10px;
-    transform:translateX(-50%);
-    left:50%;
+    background-color: rgb(248, 17, 17);
+    right:20px;
+    color:white;
     padding:10px 40px;
     p{
         margin:0;

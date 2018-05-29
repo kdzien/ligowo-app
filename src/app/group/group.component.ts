@@ -48,12 +48,7 @@ export class GroupComponent implements OnInit {
   private alertService : AlertService) {
 
   }
-  // tslint:disable-next-line:use-life-cycle-interface
-  setError() {
-    this.alertService.setMessage("wiadomosc z group",() => {
-      let ft = this.alertService.setMessage('',()=>{});
-    });
-  }
+
   ngOnDestroy() {
     this.groupTitle.setTitle('');
   }
@@ -132,14 +127,25 @@ export class GroupComponent implements OnInit {
   }
   updateBet(bet, type): void {
     // tslint:disable-next-line:no-shadowed-variable
-    this.ligowoService.upadteBet(bet, type).subscribe(bet => {
-      this.refresh();
+    this.ligowoService.updateBet(bet, type).subscribe(bet => {
+    }, err => {
+      this.alertService.setMessage(err.error.error.message, () => {
+        const ft = this.alertService.setMessage('', () => {});
+      });
     });
+    this.refresh();
   }
-  
+
   joinUser(): void {
     this.ligowoService.joinGroup(this.group_id, this.newUserEmail).subscribe(message => {
-      console.log(message);
+      this.alertService.setMessage('Dodano użytkownika', () => {
+        const ft = this.alertService.setMessage('', () => {});
+      });
+    }, err => {
+      console.log(err)
+      this.alertService.setMessage(err.error.error.message, () => {
+        const ft = this.alertService.setMessage('', () => {});
+      });
     });
   }
 
