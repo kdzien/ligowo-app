@@ -16,6 +16,7 @@ import { ForfilterPipe } from './forfilter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AlertService } from 'src/app/services/alert.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService,LigowoService,AlertService],
+  providers: [AuthenticationService,LigowoService,AlertService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
