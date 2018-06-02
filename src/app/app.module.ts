@@ -18,6 +18,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClickStopPropagationDirective } from './click-stop-propagation.directive';
 import { LandingComponent } from './landing/landing.component';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { LandingComponent } from './landing/landing.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService,LigowoService,AlertService],
+  providers: [AuthenticationService,LigowoService,AlertService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
