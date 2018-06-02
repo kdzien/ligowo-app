@@ -128,12 +128,13 @@ export class GroupComponent implements OnInit {
   updateBet(bet, type): void {
     // tslint:disable-next-line:no-shadowed-variable
     this.ligowoService.updateBet(bet, type).subscribe(bet => {
+      this.refresh();
     }, err => {
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
+        this.refresh();
       });
     });
-    this.refresh();
   }
 
   joinUser(): void {

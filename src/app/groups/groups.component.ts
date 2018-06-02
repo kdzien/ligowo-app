@@ -44,6 +44,7 @@ export class GroupsComponent implements OnInit {
   }
   getGroups() {
     this.ligowoService.getUserGroups(this.current_user.userId).subscribe(groups => {
+      console.log(groups)
       this.groups = groups.data;
     });
   }

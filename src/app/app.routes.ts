@@ -1,3 +1,4 @@
+import { LandingComponent } from './landing/landing.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -6,6 +7,7 @@ import { MainComponent } from 'src/app/main/main.component';
 import { GroupComponent } from './group/group.component';
 
 export const appRoutes: Routes = [
+  { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main',

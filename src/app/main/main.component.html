@@ -1,8 +1,8 @@
 
 <header>
 <div class="container">
-<div id="group-title">{{titleH}}</div>
 <div id="user-info"><i class="fa fa-user" aria-hidden="true"></i>{{user?.username}}</div>
+<div id="group-title" [hidden]="titleH?.length==0">{{titleH}}</div>
 <button (click)="logout()">Wyloguj</button>
 </div>
 </header>

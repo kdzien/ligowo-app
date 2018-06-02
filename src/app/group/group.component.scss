@@ -98,6 +98,9 @@ p{
 }
 }
 #admin-panel-wrapper{
+  &::-webkit-scrollbar {
+    display: none;
+}
   h4{
     text-align: left !important;
   }

@@ -4,7 +4,7 @@
       <div class="group-wrapper" >
           <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'others'" (click)="openGroup(group)" >
             {{group.name}}
-            <div class="play-c">Graczy: 4</div>
+            <div class="play-c">Graczy: {{group.users.length}}</div>
           </div>
       </div>
     </section>
@@ -15,7 +15,7 @@
       <div class="group-wrapper group-box" >
           <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'own'" (click)="openGroup(group)" >
             {{group.name}}
-            <div class="play-c">Graczy: 4</div>
+            <div class="play-c">Graczy: {{group.users.length}}</div>
           </div>
           <div class="group new-group" (click)="showNewGroupPanel()">
             <i class="fa fa-plus-square-o" aria-hidden="true"></i>
