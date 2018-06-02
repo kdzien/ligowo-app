@@ -44,8 +44,8 @@
   <section class="row">
     <section class="col-md-4 ranking">
       <div class="header">Ranking</div>
-      <div *ngFor="let rank of ranks">
-        {{rank.user.username}} {{rank.rank}}
+      <div class="rank-panel" *ngFor="let rank of ranks">
+        <div class="name">{{rank.user.username}}</div> <div class="rank">{{rank.rank}}</div>
       </div>
     </section>
     <section class="col-md-4 comments">
@@ -87,7 +87,7 @@
     <section class="admin-panel-element new-user">
       <h4>Dodaj użytkownika</h4>
       <input name="emailAdress" [(ngModel)]="newUserEmail" placeholder="Adres email użytkownika" />
-      <button class="confirm-admin" (click)="joinUser()">Dodaj użytkownika</button>
+      <button class="confirm-admin" (click)="joinUser()">DODAJ UŻYTKOWNIKA</button>
     </section>
   </section>
 </div>

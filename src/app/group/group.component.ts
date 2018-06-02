@@ -18,7 +18,7 @@ import { AlertService } from 'src/app/services/alert.service';
     trigger('myAwesomeAnimation', [
       state('hide', style({
         transform: 'translateX(-550px)',
-        height: '102px',
+        height: '99px',
       })),
       state('show', style({
         transform: 'translateX(0px)',

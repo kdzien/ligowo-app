@@ -16,6 +16,7 @@ import { ForfilterPipe } from './forfilter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { ClickStopPropagationDirective } from './click-stop-propagation.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AlertService } from 'src/app/services/alert.service';
     MainComponent,
     GroupComponent,
     ForfilterPipe,
-    AlertComponent
+    AlertComponent,
+    ClickStopPropagationDirective
   ],
   imports: [
     BrowserAnimationsModule,

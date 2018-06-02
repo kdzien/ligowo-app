@@ -1,4 +1,5 @@
 @import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
 
 header{
   z-index: 1;
@@ -6,23 +7,28 @@ header{
   background-color:white;
   margin-bottom:20px;
   .container{
+    padding:0;
   display: flex;
   flex-flow:row wrap;
   justify-content: space-between;
   #user-info, #group-title{
-    padding:10px;
     font-family: 'Signika', sans-serif;
+    padding:10px;
   }
   button{
     font-family: 'Signika', sans-serif;
     margin-left:10px;
     border:none;
-    @include main-gradient();
-    color:white;
-    padding:3px 20px;
+    background:none;
+    color:$s-color;
+    transition:0.1s all;
+    padding: 10px;
     font-size:14px;
     font-weight:bold;
-    border-radius:30px;
+    &:hover{
+      background-color:$s-color;
+      color:white;
+    }
   }
   i{
     padding-right:10px;

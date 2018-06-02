@@ -22,8 +22,9 @@ export class AuthenticationService {
 
   logout(){
     localStorage.removeItem('currentUser');
+    window.location.replace('/login');
   }
-  getUserData(): Observable<User> {    
+  getUserData(): Observable<User> {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
     return this.http.get<User>(`http://localhost:3000/api/Users/${current_user.userId}?access_token=${current_user.id}`);
   }

@@ -1,5 +1,23 @@
 @import '../../scss/mixins.scss';
 @import '../../scss/variables.scss';
+.ranking{
+  .rank-panel{
+    background-color:white ;
+    display:flex;
+    justify-content:space-between;
+    .name, .rank{
+      padding:10px 20px;
+      font-size:13px;
+    }
+    .name{
+      font-weight:bold;
+      color:rgb(17, 0, 110);
+    }
+    .rank{
+      border-left:2px solid rgb(212, 212, 212);
+    }
+  }
+}
 h1{
   text-align: center;
   margin-bottom: 20px;
@@ -90,7 +108,7 @@ p{
   left: 0;
   height: 100%;
   top: 0;
-  padding-top: 47px;
+  padding-top: 44px;
   background-color:white;
   #admin-panel{
     .admin-panel-element{

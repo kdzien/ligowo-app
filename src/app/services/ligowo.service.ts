@@ -13,6 +13,7 @@ import { Rank } from '../models/Rank';
 export class LigowoService {
   private auth_token: string;
   private user_id: string;
+  private base_url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
@@ -21,50 +22,50 @@ export class LigowoService {
   }
 
   getUserGroups (userid): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/api/groups/usergroups/${this.user_id}?access_token=${this.auth_token}`);
+    return this.http.get<any>(`${this.base_url}/api/groups/usergroups/${this.user_id}?access_token=${this.auth_token}`);
   }
   addGroup(group: Group): Observable<Group> {
-    return this.http.post<Group>(`http://localhost:3000/api/groups/?access_token=${this.auth_token}`, group);
+    return this.http.post<Group>(`${this.base_url}/api/groups/?access_token=${this.auth_token}`, group);
   }
   joinGroup(group_id, user_email): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/api/groups/join/${group_id}/${user_email}?access_token=${this.auth_token}`, { } );
+    return this.http.patch<any>(`${this.base_url}/api/groups/join/${group_id}/${user_email}?access_token=${this.auth_token}`, { } );
   }
   getGroupInfo(group_id): Observable<Group> {
-    return this.http.get<Group>(`http://localhost:3000/api/groups/${group_id}?access_token=${this.auth_token}`, {} );
+    return this.http.get<Group>(`${this.base_url}/api/groups/${group_id}?access_token=${this.auth_token}`, {} );
   }
   getMatches(group_id): Observable<Array<Match>> {
     return this.http.get<Array<Match>>(
-      `http://localhost:3000/api/Matches/bets/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
+      `${this.base_url}/api/Matches/bets/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
   getGroupMatches(group_id): Observable<Array<Match>> {
     return this.http.get<Array<Match>>(
-      `http://localhost:3000/api/Matches//bets/groupMatches/${group_id}?access_token=${this.auth_token}`, {} );
+      `${this.base_url}/api/Matches//bets/groupMatches/${group_id}?access_token=${this.auth_token}`, {} );
   }
   getFinalMatches(group_id): Observable<Array<Bet>> {
     return this.http.get<Array<Bet>>(
-      `http://localhost:3000/api/Matches/bets/userdone/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
+      `${this.base_url}/api/Matches/bets/userdone/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
   getLeftMatches(group_id): Observable<Array<Bet>> {
     return this.http.get<Array<Bet>>(
-      `http://localhost:3000/api/Matches/bets/userleft/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
+      `${this.base_url}/api/Matches/bets/userleft/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
   addMatch(matches): Observable<Array<Match>> {
-    return this.http.post<Array<Match>>(`http://localhost:3000/api/Matches`, matches);
+    return this.http.post<Array<Match>>(`${this.base_url}/api/Matches`, matches);
   }
   addBet(bet): Observable<Bet> {
     bet.user_id = this.user_id;
-    return this.http.post<Bet>(`http://localhost:3000/api/Bets`, bet);
+    return this.http.post<Bet>(`${this.base_url}/api/Bets`, bet);
   }
   updateBet(bet, type): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/api/Bets/updateBet/${bet.id}/${type}?access_token=${this.auth_token}`, {} );
+    return this.http.patch<any>(`${this.base_url}/api/Bets/updateBet/${bet.id}/${type}?access_token=${this.auth_token}`, {} );
   }
   updateMatch(match, score): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/api/Matches/${match.id}?access_token=${this.auth_token}`, {score: score} );
+    return this.http.patch<any>(`${this.base_url}/api/Matches/${match.id}?access_token=${this.auth_token}`, {score: score} );
   }
   updateRank(group_id): Observable<string> {
-    return this.http.get<any>(`http://localhost:3000/api/Matches/updateRank/${group_id}?access_token=${this.auth_token}`);
+    return this.http.get<any>(`${this.base_url}/api/Matches/updateRank/${group_id}?access_token=${this.auth_token}`);
   }
   getRank(group_id): Observable<Array<Rank>> {
-    return this.http.get<any>(`http://localhost:3000/api/Ranks/${group_id}?access_token=${this.auth_token}`);
+    return this.http.get<any>(`${this.base_url}/api/Ranks/${group_id}?access_token=${this.auth_token}`);
   }
 }

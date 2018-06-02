@@ -1,35 +1,31 @@
-<section class="container-fluid">
- <div class="row">
-
-  <section class="col-md-8 ">
+<section class="container">
     <section class="group-box">
-      <h4>Grupy do ktorych należysz</h4>
+      <div class="group-section">GRUPY DO KTÓRYCH NALEŻYSZ</div>
       <div class="group-wrapper" >
-          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'others'" (click)="openGroup(group)" >{{group.name}}</div>
+          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'others'" (click)="openGroup(group)" >
+            {{group.name}}
+            <div class="play-c">Graczy: 4</div>
+          </div>
       </div>
     </section>
-
+</section>
+<section class="container">
     <section class="group-box">
-      <h4>Twoje grupy</h4>
+      <div class="group-section">TWOJE GRUPY</div>
       <div class="group-wrapper group-box" >
-          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'own'" (click)="openGroup(group)" >{{group.name}}</div>
+          <div class="group" *ngFor="let group of groups | forfilter:current_user.userId:'own'" (click)="openGroup(group)" >
+            {{group.name}}
+            <div class="play-c">Graczy: 4</div>
+          </div>
+          <div class="group new-group" (click)="showNewGroupPanel()">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+            <div [@slideTop]='new_group_panel' class="ngrform">
+              <form>
+                  <input  name="ngGroupName" [(ngModel)]="newGroupName" click-stop-propagation placeholder="Nazwa grupy" required>
+                  <button click-stop-propagation (click)="addGroup()">DODAJ</button>
+              </form>
+            </div>
+          </div>
       </div>
     </section>
-
-  </section>
-
-  <section class="col-md-4">
-    <section class="form-wrapper">
-      <h4>Dodaj grupę</h4>
-      <form>
-        <div class="form-group">
-          <div class="form-label">Nazwa grupy</div>
-          <input name="ngGroupName" [(ngModel)]="newGroupName" class="form-control">
-        </div>
-        <button class="main-button full-width-button" (click)="addGroup()">DODAJ GRUPĘ!</button>
-      </form>
-    </section>
-  </section>
-
- </div>
 </section>
