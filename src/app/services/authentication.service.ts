@@ -22,7 +22,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('currentUser');
-    window.location.replace('/login');
+    window.location.replace('/');
   }
   getUserData(): Observable<User> {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));

@@ -10,9 +10,9 @@ import { AuthGuard } from 'src/app/services/auth.guard';
 export const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent,
   children: [
+    {path: '', pathMatch: 'full', redirectTo: 'groups'},
     {path: 'groups', component: GroupsComponent, canActivate: [AuthGuard]},
     {path: 'groups/:id', component: GroupComponent}
   ]

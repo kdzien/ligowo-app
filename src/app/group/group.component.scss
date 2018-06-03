@@ -1,6 +1,9 @@
 @import '../../scss/mixins.scss';
 @import '../../scss/variables.scss';
 .ranking{
+  .header{
+    padding-left: 20px !important;
+  }
   .rank-panel{
     background-color:white ;
     display:flex;
@@ -50,6 +53,7 @@ p{
 }
 .match-group{
   h4{
+    font-size: 20px;
     text-align:center;
   }
   background-color:white;

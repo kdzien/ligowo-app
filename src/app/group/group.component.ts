@@ -45,7 +45,7 @@ export class GroupComponent implements OnInit {
   private newUserEmail: string;
 
   constructor(private route: ActivatedRoute, private ligowoService: LigowoService, private groupTitle: GrouptitleService,
-  private alertService : AlertService) {
+  private alertService: AlertService) {
 
   }
 

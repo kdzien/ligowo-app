@@ -1,6 +1,7 @@
+import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   password: string;
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -22,7 +24,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username, this.password).subscribe(user => {
       this.router.navigate(['main/groups']);
     }, err => {
-      console.log(err);
+      this.alertService.setMessage(err.error.error.message, () => {
+        const ft = this.alertService.setMessage('', () => {});
+      });
     });
   }
 }

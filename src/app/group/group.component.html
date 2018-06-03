@@ -1,63 +1,61 @@
 <section class="container">
-    <div class="header">Twoje typowania</div>
   <div class="row">
-    <section class="col-md-4 match-group">
-      <h4>Mecze do obstawienia:</h4>
-        <p *ngIf="matches?.length==0">Nie ma żadnych meczow</p>
-        <div class="match-panel" *ngFor="let match of matches">
-          <div class="name">{{match.name}}</div>
-          <div class="bet-wrapper">
-            <button (click)="betMatch(match,1)">1</button>
-            <button (click)="betMatch(match,0)">X</button>
-            <button (click)="betMatch(match,2)">2</button>
+    <div class="col-md-9">
+      <div class="header">Twoje typowania</div>
+        <div class="row">
+            <section class="col-md-4 match-group">
+              <h4>Mecze do obstawienia:</h4>
+                <p *ngIf="matches?.length==0">Nie ma żadnych meczow</p>
+                <div class="match-panel" *ngFor="let match of matches">
+                  <div class="name">{{match.name}}</div>
+                  <div class="bet-wrapper">
+                    <button (click)="betMatch(match,1)">1</button>
+                    <button (click)="betMatch(match,0)">X</button>
+                    <button (click)="betMatch(match,2)">2</button>
+                  </div>
+                </div>
+            </section>
+            <section class="col-md-4 match-group">
+              <h4>Mecze obstawione:</h4>
+              <p *ngIf="leftMatches?.length==0">Nic nie obstawiles</p>
+              <div class="match-panel" *ngFor="let leftM of leftMatches">
+                <div class="name">{{leftM.match.name}}</div>
+                <div class="bet">{{leftM.type}}</div>
+                <div class="bet-wrapper">
+                  <button (click)="updateBet(leftM,1)">1</button>
+                  <button (click)="updateBet(leftM,0)">X</button>
+                  <button (click)="updateBet(leftM,2)">2</button>
+                </div>
+
+              </div>
+            </section>
+            <section class="col-md-4 match-group">
+              <h4>Mecze zakończone:</h4>
+              <p *ngIf="finalMatches?.length==0">Brak zakończonych meczow</p>
+              <div class="match-panel" *ngFor="let finalM of finalMatches" >
+                <div class="name">{{finalM.match.name}}</div>
+
+                <i *ngIf="finalM.status==2" class="fa fa-times" ></i>
+                <i *ngIf="finalM.status==1" class="fa fa-check"></i>
+                <i *ngIf="finalM.status==0" class="fa fa-minus"></i>
+              </div>
+            </section>
           </div>
+    </div>
+    <section class="col-md-3 ranking">
+        <div class="header">Ranking</div>
+        <p *ngIf="ranks?.length==0">Brak aktualnego rankingu.</p>
+        <div class="rank-panel" *ngFor="let rank of ranks">
+          <div class="name">{{rank.user.username}}</div> <div class="rank">{{rank.rank}}</div>
         </div>
-    </section>
-    <section class="col-md-4 match-group">
-      <h4>Mecze obstawione:</h4>
-      <p *ngIf="leftMatches?.length==0">Nic nie obstawiles</p>
-      <div class="match-panel" *ngFor="let leftM of leftMatches">
-        <div class="name">{{leftM.match.name}}</div>
-        <div class="bet">{{leftM.type}}</div>
-        <div class="bet-wrapper">
-          <button (click)="updateBet(leftM,1)">1</button>
-          <button (click)="updateBet(leftM,0)">X</button>
-          <button (click)="updateBet(leftM,2)">2</button>
-        </div>
-
-      </div>
-    </section>
-    <section class="col-md-4 match-group">
-      <h4>Mecze zakończone:</h4>
-      <p *ngIf="finalMatches?.length==0">Brak zakończonych meczow</p>
-      <div class="match-panel" *ngFor="let finalM of finalMatches" >
-        <div class="name">{{finalM.match.name}}</div>
-
-        <i *ngIf="finalM.status==2" class="fa fa-times" ></i>
-        <i *ngIf="finalM.status==1" class="fa fa-check"></i>
-        <i *ngIf="finalM.status==0" class="fa fa-minus"></i>
-      </div>
-    </section>
-  </div>
-</section>
-<section class="container">
-  <section class="row">
-    <section class="col-md-4 ranking">
-      <div class="header">Ranking</div>
-      <div class="rank-panel" *ngFor="let rank of ranks">
-        <div class="name">{{rank.user.username}}</div> <div class="rank">{{rank.rank}}</div>
-      </div>
-    </section>
-    <section class="col-md-4 comments">
-        <div class="header">Komentarze</div>
       </section>
-  </section>
+  </div>
 </section>
 
 <div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
   <section id="admin-panel">
     <section class="admin-panel-element">
-      <h4>Dodaj mecze <i class="fa fa-times" [ngClass]="{'fa-bars':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
+      <h4>Dodaj mecze <i class="fa fa-times" [ngClass]="{'fa-cog':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
       <form id="newMatch">
         <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
           <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu">
@@ -91,4 +89,6 @@
     </section>
   </section>
 </div>
+
+
 

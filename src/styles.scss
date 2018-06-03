@@ -1,3 +1,7 @@
+
+@import '/scss/mixins.scss';
+@import '/scss/variables.scss';
+
 body{
   background-color:whitesmoke !important;
   font-family: 'Raleway', sans-serif !important;
@@ -5,5 +9,35 @@ body{
 button{
   &:hover{
     cursor:pointer;
+  }
+}
+
+
+form{
+  &.login, &.register{
+    .form-header{
+      font-family: 'Quicksand', sans-serif;
+      text-align:center;
+      font-weight:500;
+      padding:7px;
+      font-size:22px;
+    }
+    background-color:#ffffff8c;
+    padding:35px;
+    border-radius:4px;
+    label{
+      margin:0;
+      margin-left:10px;
+    }
+    input,button{
+      border:none;
+      border-radius:0%;
+      padding:12px;
+      text-align:center;
+    }
+    button{
+      width:100%;
+      background: $s-color;
+    }
   }
 }

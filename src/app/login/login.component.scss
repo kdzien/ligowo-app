@@ -1,0 +1,18 @@
+
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
+form{
+  background-color:rgba(0,0,0,0);
+  width: 90%;
+  margin: 0 auto;
+  .form-header{
+    color:$s-color;
+    margin-bottom:25px;
+  }
+  button{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:500;
+    width:50%;
+  }
+}
