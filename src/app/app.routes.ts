@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent,
   children: [
-    {path: 'groups', component: GroupsComponent, canActivate: [AuthGuard],},
+    {path: 'groups', component: GroupsComponent, canActivate: [AuthGuard]},
     {path: 'groups/:id', component: GroupComponent}
   ]
 },

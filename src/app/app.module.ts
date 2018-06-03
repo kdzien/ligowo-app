@@ -42,7 +42,7 @@ import { AuthGuard } from 'src/app/services/auth.guard';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService,LigowoService,AlertService,AuthGuard],
+  providers: [AuthenticationService, LigowoService, AlertService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

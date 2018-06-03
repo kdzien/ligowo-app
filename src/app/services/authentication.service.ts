@@ -20,7 +20,7 @@ export class AuthenticationService {
     return this.http.post<User>('http://localhost:3000/api/Users', {username: username, email: email, password: password} )
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('currentUser');
     window.location.replace('/login');
   }
