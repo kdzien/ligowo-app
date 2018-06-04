@@ -19,6 +19,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ClickStopPropagationDirective } from './click-stop-propagation.directive';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from 'src/app/services/auth.guard';
+import { WaitingComponent } from './waiting/waiting.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthGuard } from 'src/app/services/auth.guard';
     ForfilterPipe,
     AlertComponent,
     ClickStopPropagationDirective,
-    LandingComponent
+    LandingComponent,
+    WaitingComponent
   ],
   imports: [
     BrowserAnimationsModule,

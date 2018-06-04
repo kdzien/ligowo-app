@@ -21,11 +21,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.alertService.showModal();
     this.authService.login(this.username, this.password).subscribe(user => {
+      this.alertService.hideModal();
       this.router.navigate(['main/groups']);
     }, err => {
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
+        this.alertService.hideModal();
       });
     });
   }

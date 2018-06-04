@@ -20,10 +20,12 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   register(): void {
+    this.alertService.showModal();
     this.authService.register(this.username, this.email, this.password).subscribe(user => {
+      this.alertService.hideModal();
       this.router.navigate(['/']);
     }, err => {
-      console.log(err);
+      this.alertService.hideModal();
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
       });
