@@ -91,15 +91,21 @@ export class GroupComponent implements OnInit {
     this.newMatches.push({name: '', date: ''});
   }
   sendMatches(): void {
-    // tslint:disable-next-line:prefer-const
     let tempMatchesArray = [];
     this.newMatches.forEach(elem => {
-      // tslint:disable-next-line:max-line-length
       tempMatchesArray.push({group_id: this.group_id, name: elem.name, date: `${elem.date.replace(/-/g, '')}${elem.time.replace(/:/g, '')}`});
     });
     this.ligowoService.addMatch(tempMatchesArray).subscribe(match => {
       this.newMatches = [{name: '', date: ''}];
-      this.refresh();
+      this.alertService.setMessage("Dodano mecze", () => {
+        const ft = this.alertService.setMessage('', () => {});
+        this.refresh();
+      });
+    },err => {
+      this.alertService.setMessage(err.error.error.message, () => {
+        const ft = this.alertService.setMessage('', () => {});
+        this.refresh();
+      });
     });
   }
   updateRank(): void {

@@ -10,9 +10,20 @@
     padding:15px;
     letter-spacing:2px;
     font-weight:700;
+    position:absolute;
   }
   .row{
-    margin: 170px 70px !important;
+    width:100%;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    @include small-medias(){
+      padding-bottom:50px;
+      width:auto;
+      margin:0 !important;
+      top:100px;
+      transform:none;
+    }
   }
 }
 .page-header{

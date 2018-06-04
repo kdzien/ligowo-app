@@ -3,6 +3,10 @@
 @import '../../scss/variables.scss';
 
 form{
+  padding-top:0px;
+  @include small-medias(){
+    padding:0;width:100%;
+  }
   background-color:rgba(0,0,0,0);
   width: 90%;
   margin: 0 auto;

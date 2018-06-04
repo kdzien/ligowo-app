@@ -37,6 +37,9 @@ p{
 .container{
   margin-bottom:20px;
   .header{
+    @include small-medias(){
+      text-align:center;
+    }
     font-size: 15px;
     font-weight:bold;
     text-align: left;
@@ -102,15 +105,24 @@ p{
 }
 }
 #admin-panel-wrapper{
+  z-index:9;
   &::-webkit-scrollbar {
     display: none;
 }
   h4{
     text-align: left !important;
   }
-  overflow: hidden;
+  overflow: scroll;
   @include main-shadow();
   width: 600px;
+  @include small-medias(){
+    position: initial;
+    width:100%;
+    padding-top:0px;
+    height:none;
+    transform:none !important;
+    height:auto !important;
+  }
   position: absolute;
   left: 0;
   height: 100%;
@@ -127,6 +139,7 @@ p{
         background-color:$s-color;
         margin:-10px -10px 10px -10px;
         i{
+          @include small-medias(){display:none}
           float:right;
         }
       }

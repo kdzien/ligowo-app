@@ -1,3 +1,41 @@
+<div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
+  <section id="admin-panel">
+    <section class="admin-panel-element">
+      <h4>Dodaj mecze (walidacja w budowie) <i class="fa fa-times" [ngClass]="{'fa-cog':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
+      <form  id="newMatch">
+        <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
+          <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu" required />
+          <input [(ngModel)]="newMatch.date" name="newMatchDate{{i}}" id="date" type="date" required />
+          <input [(ngModel)]="newMatch.time" name="newMatchTime{{i}}" id="time" type="time" required />
+        </div>
+        <button (click)="addMatch()" >Dodaj mecz</button>
+      </form>
+      <button  class="confirm-admin" (click)="sendMatches()">DODAJ MECZE</button>
+    </section>
+    <section class="admin-panel-element match-group">
+      <h4>Wprowadz wyniki</h4>
+      <p *ngIf="groupMatches?.length==0">Brak zakończonych meczow</p>
+      <div class="match-panel" *ngFor="let match of groupMatches">
+        <div class="name">{{match.name}}</div>
+        <div class="bet-wrapper">
+          <button (click)="updateMatch(match,1)">1</button>
+          <button (click)="updateMatch(match,0)">X</button>
+          <button (click)="updateMatch(match,2)">2</button>
+        </div>
+      </div>
+    </section>
+    <section class="admin-panel-element">
+      <h4>Aktualizacja rankingu</h4>
+      <button class="confirm-admin" (click)="updateRank()">ZAAKTUALIZUJ</button>
+    </section>
+    <section class="admin-panel-element new-user">
+      <h4>Dodaj użytkownika</h4>
+      <input name="emailAdress" [(ngModel)]="newUserEmail" placeholder="Adres email użytkownika" />
+      <button class="confirm-admin" (click)="joinUser()">DODAJ UŻYTKOWNIKA</button>
+    </section>
+  </section>
+</div>
+
 <section class="container">
   <div class="row">
     <div class="col-md-9">
@@ -52,43 +90,7 @@
   </div>
 </section>
 
-<div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
-  <section id="admin-panel">
-    <section class="admin-panel-element">
-      <h4>Dodaj mecze <i class="fa fa-times" [ngClass]="{'fa-cog':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
-      <form id="newMatch">
-        <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
-          <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu">
-          <input [(ngModel)]="newMatch.date" name="newMatchDate{{i}}" id="date" type="date">
-          <input [(ngModel)]="newMatch.time" name="newMatchTime{{i}}" id="time" type="time">
-        </div>
-        <button (click)="addMatch()" >Dodaj mecz</button>
-      </form>
-      <button class="confirm-admin" (click)="sendMatches()">DODAJ MECZE</button>
-    </section>
-    <section class="admin-panel-element match-group">
-      <h4>Wprowadz wyniki</h4>
-      <p *ngIf="groupMatches?.length==0">Brak zakończonych meczow</p>
-      <div class="match-panel" *ngFor="let match of groupMatches">
-        <div class="name">{{match.name}}</div>
-        <div class="bet-wrapper">
-          <button (click)="updateMatch(match,1)">1</button>
-          <button (click)="updateMatch(match,0)">X</button>
-          <button (click)="updateMatch(match,2)">2</button>
-        </div>
-      </div>
-    </section>
-    <section class="admin-panel-element">
-      <h4>Aktualizacja rankingu</h4>
-      <button class="confirm-admin" (click)="updateRank()">ZAAKTUALIZUJ</button>
-    </section>
-    <section class="admin-panel-element new-user">
-      <h4>Dodaj użytkownika</h4>
-      <input name="emailAdress" [(ngModel)]="newUserEmail" placeholder="Adres email użytkownika" />
-      <button class="confirm-admin" (click)="joinUser()">DODAJ UŻYTKOWNIKA</button>
-    </section>
-  </section>
-</div>
+
 
 
 
