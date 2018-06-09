@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { LigowoService } from 'src/app/services/ligowo.service';
 import { GroupComponent } from './group/group.component';
 import { ForfilterPipe } from './forfilter.pipe';
+import { ToDatePipe } from './toDate.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from 'src/app/services/alert.service';
@@ -20,6 +21,7 @@ import { ClickStopPropagationDirective } from './click-stop-propagation.directiv
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from 'src/app/services/auth.guard';
 import { WaitingComponent } from './waiting/waiting.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,12 @@ import { WaitingComponent } from './waiting/waiting.component';
     MainComponent,
     GroupComponent,
     ForfilterPipe,
+    ToDatePipe,
     AlertComponent,
     ClickStopPropagationDirective,
     LandingComponent,
-    WaitingComponent
+    WaitingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,

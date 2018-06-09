@@ -6,10 +6,12 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
+    // private base_url = 'http://infinite-inlet-55610.herokuapp.com';
+    private base_url = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    return this.http.post<any>('http://infinite-inlet-55610.herokuapp.com/api/Users/login', {email: email, password: password} ).map(user => {
+    return this.http.post<any>(`${this.base_url}/api/Users/login`, {email: email, password: password} ).map(user => {
       if (user && user.id) {
           localStorage.setItem('currentUser', JSON.stringify(user));
       }
@@ -17,7 +19,7 @@ export class AuthenticationService {
     });
   }
   register(username: string, email: string, password: string): Observable<User> {
-    return this.http.post<User>('http://infinite-inlet-55610.herokuapp.com/api/Users', {username: username, email: email, password: password} )
+    return this.http.post<User>(`${this.base_url}/api/Users`, {username: username, email: email, password: password} )
   }
 
   logout() {
@@ -26,6 +28,6 @@ export class AuthenticationService {
   }
   getUserData(): Observable<User> {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
-    return this.http.get<User>(`http://infinite-inlet-55610.herokuapp.com/api/Users/${current_user.userId}?access_token=${current_user.id}`);
+    return this.http.get<User>(`${this.base_url}/api/Users/${current_user.userId}?access_token=${current_user.id}`);
   }
 }

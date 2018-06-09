@@ -1,7 +1,7 @@
 <div id="admin-panel-wrapper" *ngIf="current_user==group?.admin" [@myAwesomeAnimation]='adminPanel'>
   <section id="admin-panel">
     <section class="admin-panel-element">
-      <h4>Dodaj mecze (walidacja w budowie) <i class="fa fa-times" [ngClass]="{'fa-cog':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
+      <h4>Dodaj mecze<i class="fa fa-times" [ngClass]="{'fa-cog':adminPanel=='hide', 'fa-times':adminPanel=='show'}" (click)="showAdminPanel()"></i></h4>
       <form  id="newMatch">
         <div *ngFor="let newMatch of newMatches; let i = index;" class="form-group">
           <input [(ngModel)]="newMatch.name" name="newMatchName{{i}}" placeholder="nazwa meczu" required />
@@ -45,7 +45,7 @@
               <h4>Mecze do obstawienia:</h4>
                 <p *ngIf="matches?.length==0">Nie ma żadnych meczow</p>
                 <div class="match-panel" *ngFor="let match of matches">
-                  <div class="name">{{match.name}}</div>
+                  <div class="name">{{match.name}}<br><small>{{match.date | toDate}}</small></div>
                   <div class="bet-wrapper">
                     <button (click)="betMatch(match,1)">1</button>
                     <button (click)="betMatch(match,0)">X</button>
@@ -57,7 +57,7 @@
               <h4>Mecze obstawione:</h4>
               <p *ngIf="leftMatches?.length==0">Nic nie obstawiles</p>
               <div class="match-panel" *ngFor="let leftM of leftMatches">
-                <div class="name">{{leftM.match.name}}</div>
+                <div class="name">{{leftM.match.name}}<br><small>{{leftM.match.date | toDate}}</small></div>
                 <div class="bet">{{leftM.type}}</div>
                 <div class="bet-wrapper">
                   <button (click)="updateBet(leftM,1)">1</button>
@@ -84,7 +84,7 @@
         <div class="header">Ranking</div>
         <p *ngIf="ranks?.length==0">Brak aktualnego rankingu.</p>
         <div class="rank-panel" *ngFor="let rank of ranks">
-          <div class="name">{{rank.user.username}}</div> <div class="rank">{{rank.rank}}</div>
+          <div class="name">{{rank.user.username}}</div> <div class="rank">{{rank.rank}} pkt</div>
         </div>
       </section>
   </div>

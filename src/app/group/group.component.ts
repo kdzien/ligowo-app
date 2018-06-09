@@ -39,7 +39,7 @@ export class GroupComponent implements OnInit {
   private leftMatches: Array<Bet>;
   private ranks: Array<Rank>;
   private groupMatches: Array<Match>;
-  private newMatches: Array<Match> = [{name: '', date: ''}];
+  private newMatches: Array<Match> = [{name: '', date: '', time: ''}];
   private group_id: string;
   private current_user: string;
   private newUserEmail: string;
@@ -59,68 +59,88 @@ export class GroupComponent implements OnInit {
       this.group = group;
       this.groupTitle.setTitle(this.group.name);
     });
-    this.refresh();
-  }
-  getGroupMatches(id: string): void {
-    this.ligowoService.getGroupMatches(id).subscribe(matches => {
-      console.log(matches);
-      this.groupMatches = matches;
+    this.refresh(() => {
+
     });
   }
-  getMatches(id: string): void {
-    this.ligowoService.getMatches(id).subscribe(matches => {
-      this.matches = matches;
+  getGroupMatches(id: string) {
+    return new Promise((resolve,reject) => {
+      this.ligowoService.getGroupMatches(id).subscribe(matches => {
+        this.groupMatches = matches;
+        resolve();
+      });
+    })
+  }
+  getMatches(id: string) {
+    return new Promise((resolve,reject) => {
+      this.ligowoService.getMatches(id).subscribe(matches => {
+        this.matches = matches;
+        resolve();
+      });
+    })
+  }
+  getFinalMatches(id: string) {
+    return new Promise((resolve, reject) => {
+      this.ligowoService.getFinalMatches(id).subscribe(finalMatches => {
+        this.finalMatches = finalMatches;
+        resolve();
+      });
     });
   }
-  getFinalMatches(id: string): void {
-    this.ligowoService.getFinalMatches(id).subscribe(finalMatches => {
-      this.finalMatches = finalMatches;
+  getLeftMatches(id: string) {
+    return new Promise((resolve,reject) => {
+      this.ligowoService.getLeftMatches(id).subscribe(leftMatches => {
+        this.leftMatches = leftMatches;
+        resolve();
+      });
     });
   }
-  getLeftMatches(id: string): void {
-    this.ligowoService.getLeftMatches(id).subscribe(leftMatches => {
-      this.leftMatches = leftMatches;
-    });
-  }
-  getRank(id: string): void {
-    this.ligowoService.getRank(id).subscribe(ranks => {
-      this.ranks = ranks;
+  getRank(id: string) {
+    return new Promise((resolve,reject) => {
+      this.ligowoService.getRank(id).subscribe(ranks => {
+        this.ranks = ranks;
+        resolve();
+      });
     });
   }
   addMatch(): void {
-    this.newMatches.push({name: '', date: ''});
+    this.newMatches.push({name: '', date: '', time: ''});
   }
   sendMatches(): void {
-    let tempMatchesArray = [];
-    this.newMatches.forEach(elem => {
-      tempMatchesArray.push({group_id: this.group_id, name: elem.name, date: `${elem.date.replace(/-/g, '')}${elem.time.replace(/:/g, '')}`});
-    });
-    this.ligowoService.addMatch(tempMatchesArray).subscribe(match => {
-      this.newMatches = [{name: '', date: ''}];
-      this.alertService.setMessage("Dodano mecze", () => {
-        const ft = this.alertService.setMessage('', () => {});
-        this.refresh();
-      });
-    },err => {
+    this.alertService.showModal();
+    this.ligowoService.addMatch(this.newMatches, this.group_id).subscribe(match => {
+      this.newMatches = [{name: '', date: '', time: ''}];
+        this.refresh(() => {
+          this.alertService.setMessage('Dodano mecze', () => {
+            const ft = this.alertService.setMessage('', () => {});
+          });
+        });
+    }, err => {
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
-        this.refresh();
       });
     });
   }
   updateRank(): void {
+    this.alertService.showModal();
     this.ligowoService.updateRank(this.group_id).subscribe(status => {
-      this.refresh();
-      console.log(status);
+        this.refresh(() => {
+          this.alertService.setMessage(status, () => {
+            const ft = this.alertService.setMessage('', () => {});
+          });
+        });
     });
   }
   updateMatch(match, score): void {
+    this.alertService.showModal();
     this.ligowoService.updateMatch(match, score).subscribe(matchs => {
-      this.refresh();
+      this.refresh(() => {
+      });
     });
   }
 
   betMatch(match, type): void {
+    this.alertService.showModal();
     const newBet: Bet = {
       type: type,
       status: 0,
@@ -128,18 +148,23 @@ export class GroupComponent implements OnInit {
       matchId: match.id
     };
     this.ligowoService.addBet(newBet).subscribe(bet => {
-      this.refresh();
+      this.refresh(() => {
+
+      });
     });
   }
   updateBet(bet, type): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.ligowoService.updateBet(bet, type).subscribe(bet => {
-      this.refresh();
-    }, err => {
-      this.alertService.setMessage(err.error.error.message, () => {
-        const ft = this.alertService.setMessage('', () => {});
-        this.refresh();
+    this.alertService.showModal();
+    this.ligowoService.updateBet(bet, type).subscribe(betx => {
+      this.refresh(() => {
+
       });
+    }, err => {
+        this.refresh(() => {
+          this.alertService.setMessage(err.error.error.message, () => {
+            const ft = this.alertService.setMessage('', () => {});
+          });
+        });
     });
   }
 
@@ -149,19 +174,21 @@ export class GroupComponent implements OnInit {
         const ft = this.alertService.setMessage('', () => {});
       });
     }, err => {
-      console.log(err)
+      console.log(err);
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
       });
     });
   }
 
-  refresh(): void {
-    this.getMatches(this.group_id);
-    this.getLeftMatches(this.group_id);
-    this.getFinalMatches(this.group_id);
-    this.getGroupMatches(this.group_id);
-    this.getRank(this.group_id);
+  refresh(cb): void {
+    this.alertService.showModal();
+    Promise.all([this.getMatches(this.group_id), this.getLeftMatches(this.group_id),
+      this.getFinalMatches(this.group_id), this.getGroupMatches(this.group_id), this.getRank(this.group_id)])
+      .then(() => {
+        this.alertService.hideModal();
+        cb();
+      });
   }
   showAdminPanel() {
     this.adminPanel = (this.adminPanel === 'hide' ? 'show' : 'hide');

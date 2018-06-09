@@ -1,3 +1,4 @@
+import { AlertService } from './../services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { LigowoService } from 'src/app/services/ligowo.service';
 import { Group } from 'src/app/models/Group';
@@ -25,7 +26,7 @@ export class GroupsComponent implements OnInit {
   private current_user: any;
   private groups: Array<Group>;
   newGroupName: string;
-  constructor(private ligowoService: LigowoService, private router: Router) {
+  constructor(private ligowoService: LigowoService, private router: Router, private alertService: AlertService) {
 
   }
   addGroup(): void {
@@ -34,8 +35,11 @@ export class GroupsComponent implements OnInit {
       admin: this.current_user.userId,
       users: [this.current_user.userId]
     };
+    this.alertService.showModal();
     this.ligowoService.addGroup(new_group).subscribe(group => {
-      this.getGroups();
+      this.getGroups().then(() => {
+        this.alertService.hideModal();
+      });
     }, err => {
       console.log(err);
     });
@@ -43,18 +47,22 @@ export class GroupsComponent implements OnInit {
     this.newGroupName = '';
   }
   getGroups() {
-    this.ligowoService.getUserGroups(this.current_user.userId).subscribe(groups => {
-      console.log(groups)
-      this.groups = groups.data;
-    });
+    return new Promise((resolve, reject) => {
+      this.ligowoService.getUserGroups(this.current_user.userId).subscribe(groups => {
+        this.groups = groups.data;
+        resolve();
+      });
+    })
   }
   openGroup(group): void {
     this.router.navigate([`main/groups/${group.id}`]);
   }
   ngOnInit() {
+    this.alertService.showModal();
     this.current_user = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.current_user);
-    this.getGroups();
+    this.getGroups().then(() => {
+      this.alertService.hideModal();
+    });
   }
   showNewGroupPanel() {
     this.new_group_panel = (this.new_group_panel === 'hide' ? 'show' : 'hide');

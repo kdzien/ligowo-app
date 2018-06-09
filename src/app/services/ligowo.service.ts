@@ -13,7 +13,8 @@ import { Rank } from '../models/Rank';
 export class LigowoService {
   private auth_token: string;
   private user_id: string;
-  private base_url = 'http://infinite-inlet-55610.herokuapp.com';
+  // private base_url = 'http://infinite-inlet-55610.herokuapp.com';
+  private base_url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
@@ -49,8 +50,8 @@ export class LigowoService {
     return this.http.get<Array<Bet>>(
       `${this.base_url}/api/Matches/bets/userleft/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
-  addMatch(matches): Observable<Array<Match>> {
-    return this.http.post<Array<Match>>(`${this.base_url}/api/Matches`, matches);
+  addMatch(matches,gid): Observable<Array<Match>> {
+    return this.http.post<Array<Match>>(`${this.base_url}/api/Matches/add/${gid}`, matches);
   }
   addBet(bet): Observable<Bet> {
     bet.user_id = this.user_id;
