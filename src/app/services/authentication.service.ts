@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
-    // private base_url = 'http://infinite-inlet-55610.herokuapp.com';
-    private base_url = 'http://localhost:3000';
+     private base_url = 'http://infinite-inlet-55610.herokuapp.com';
+    // private base_url = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
@@ -24,7 +24,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('currentUser');
-    window.location.replace('/');
+    window.location.replace('/ligowo-app-dev');
   }
   getUserData(): Observable<User> {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
