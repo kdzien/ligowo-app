@@ -13,7 +13,7 @@ import { Rank } from '../models/Rank';
 export class LigowoService {
   private auth_token: string;
   private user_id: string;
-   private base_url = 'http://infinite-inlet-55610.herokuapp.com';
+   private base_url = 'https://quiet-sea-36923.herokuapp.com';
   // private base_url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
