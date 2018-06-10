@@ -116,9 +116,10 @@ export class GroupComponent implements OnInit {
           });
         });
     }, err => {
-      this.alertService.setMessage(err.error.error.message, () => {
-        const ft = this.alertService.setMessage('', () => {});
-      });
+      this.alertService.hideModal();
+        this.alertService.setMessage(err.error.error.message, () => {
+          const ft = this.alertService.setMessage('', () => {});
+        });
     });
   }
   updateRank(): void {

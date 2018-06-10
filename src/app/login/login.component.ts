@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
       this.alertService.hideModal();
       this.router.navigate(['main/groups']);
     }, err => {
+      this.alertService.hideModal();
       this.alertService.setMessage(err.error.error.message, () => {
         const ft = this.alertService.setMessage('', () => {});
-        this.alertService.hideModal();
       });
     });
   }

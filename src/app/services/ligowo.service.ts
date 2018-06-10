@@ -51,6 +51,7 @@ export class LigowoService {
       `${this.base_url}/api/Matches/bets/userleft/${this.user_id}/${group_id}?access_token=${this.auth_token}`, {} );
   }
   addMatch(matches,gid): Observable<Array<Match>> {
+    console.log(matches)
     return this.http.post<Array<Match>>(`${this.base_url}/api/Matches/add/${gid}`, matches);
   }
   addBet(bet): Observable<Bet> {
