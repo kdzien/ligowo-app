@@ -8,17 +8,14 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   username: string;
   password: string;
   constructor(
     private authService: AuthenticationService,
     private router: Router,
     private alertService: AlertService
-  ) { }
-
-  ngOnInit() {
-  }
+  ) {}
 
   login(): void {
     this.alertService.showModal();
