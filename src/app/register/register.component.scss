@@ -1,3 +1,7 @@
+
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
 .container-fluid{
   padding-top:100px;
   background-image:url('../../images/background.png');
@@ -6,5 +10,33 @@
   height:100vh;
 }
 form{
-  padding:35px;
+  margin:0 auto;
+  width:500px;
+  padding:30px;
+  background-color:white;
+  .form-header{
+    border-left:solid 3px $s-color;
+    font-weight: 600;
+    font-size: 35px;
+    text-align:left;
+    margin:20px 0px;
+    margin-left: -30px;
+    padding-left: 30px;
+  }
+  input{
+    border-bottom:1px solid rgb(221, 221, 221);
+    text-align:left;
+    margin-bottom:20px;
+  }
+  a{
+    text-decoration:none;
+    color:gray;
+  }
+  button{
+    transition: .4s;
+    color:white;
+    &:hover{
+      opacity:0.9;
+    }
+  }
 }

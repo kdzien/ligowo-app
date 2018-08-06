@@ -1,7 +1,9 @@
+@import '/variables.scss';
+
 @mixin main-gradient() {
-  background: #0052D4;
-  background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
-  background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+  background: $s-color;
+  background: -webkit-linear-gradient(to right, lighten($s-color,10%), lighten($s-color,5%), $s-color);
+  background: linear-gradient(to right, lighten($s-color,10%), lighten($s-color,5%), $s-color);
 }
 
 @mixin main-shadow(){
@@ -12,4 +14,7 @@ box-shadow: 2px 2px 2px 0px #afafaf;
 
 @mixin small-medias(){
     @media only screen and (max-width: 767px) { @content; }
+}
+@mixin l1024(){
+  @media only screen and (max-width: 1025px) { @content; }
 }

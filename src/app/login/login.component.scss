@@ -3,40 +3,36 @@
 @import '../../scss/variables.scss';
 
 form{
-
-  padding-top:0px;
-  background-color:rgba(0,0,0,0);
-  margin: 0 -15px;
+  margin:0 auto;
+  width:500px;
+  @include l1024{
+    width:100%;
+  }
+  padding:30px;
+  background-color:white;
   .form-header{
-    margin-left:15px;
+    border-left:solid 3px $s-color;
+    font-weight: 600;
+    font-size: 35px;
     text-align:left;
-    color:white;
-    font-weight:200;
-    margin-bottom:10px;
-    font-size:27px;
-    letter-spacing:-1px;
+    margin:20px 0px;
+    margin-left: -30px;
+    padding-left: 30px;
   }
   input{
-    font-family: 'Quicksand', sans-serif;
-    letter-spacing:1px;
-    color:white;
-    border-radius:0;
-    padding:15px;
-    background-color: #383838;
+    border-bottom:1px solid rgb(221, 221, 221);
     text-align:left;
-    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: white;
-     }
+    margin-bottom:20px;
+  }
+  a{
+    text-decoration:none;
+    color:gray;
   }
   button{
-    padding:10px;
-    margin-top:15px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight:500;
-    width:50%;
-    background:none;
-    border:solid 2px $s-color;
-    border-left:none;
-    color:$s-color;
+    transition: .4s;
+    color:white;
+    &:hover{
+      opacity:0.9;
+    }
   }
 }

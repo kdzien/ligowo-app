@@ -1,11 +1,12 @@
   <form class="login">
-      <div class="form-header">ZALOGUJ SIĘ NA SWOJE KONTO</div>
+      <div class="form-header">LOGOWANIE</div>
     <div class="">
       <input type="email" class="form-control" name="username" [(ngModel)]="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
     </div>
     <div class="">
       <input type="password" class="form-control" name="username" [(ngModel)]="password" id="exampleInputPassword1" placeholder="hasło">
     </div>
-    <button type="submit" (click)="login()" class="btn btn-primary">ZALOGUJ</button>
+    <button type="submit" (click)="login()" >ZALOGUJ</button>
+    <a routerLink="/register">Rejestracja</a>
   </form>
 

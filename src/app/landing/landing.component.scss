@@ -16,21 +16,29 @@
     height:100vh;
     .left{
       background-color:$s-color;
+      transform:skewX(-15deg);
+      z-index:99;
+      @include l1024{
+        height:100%;
+        transform:skewX(0deg);
+      }
+      &:before{
+        content:"";
+        position:absolute;
+        top:0;    left: -130px;
+        width:200px;
+        height:50%;
+        background-color:$s-color;
+      }
     }
     .right{
-
-      background-color:#414141;
-      .register{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 20px;
-        background-color: #2d2d2d;
-        a{
-          color:rgb(148, 148, 148);
-
+      position:relative;
+      .content{
+        @include small-medias{
+          position:relative;
+          z-index:99;
+          width:100%;
+          top:80px;
         }
       }
     }
@@ -42,8 +50,11 @@
   }
 }
 .page-header{
+  @include l1024{
+    transform:skewX(0deg);
+  }
   text-align:center;
-  color:rgb(219, 219, 219);
+  color:rgb(247, 247, 247);
   h1{
     letter-spacing:2px;
     font-weight:500;

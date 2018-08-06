@@ -1,8 +1,18 @@
+
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
 .notFound{
+  width:100%;
+  text-align:center;
   padding:20px;
   font-size:50px;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   position:absolute;
+    .code{
+      color:$s-color;
+      letter-spacing:4px;
+      font-size:90px;
+    }
 }
